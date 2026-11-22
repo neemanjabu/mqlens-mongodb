@@ -62,14 +62,10 @@ async fn fetch_update(
 
 /// Check the given channel's manifest for an available update.
 #[tauri::command]
-pub async fn update_check(app: AppHandle, channel: String) -> Result<Option<UpdateMeta>, String> {
-    let update = fetch_update(&app, &channel).await?;
-    Ok(update.map(|u| UpdateMeta {
-        version: u.version.clone(),
-        current_version: u.current_version.clone(),
-        notes: u.body.clone(),
-        date: u.date.map(|d| d.to_string()),
-    }))
+pub async fn update_check(_app: AppHandle, _channel: String) -> Result<Option<UpdateMeta>, String> {
+    // Combined build of the fork: it carries changes the official releases do
+    // not have yet, so it never offers an update that would replace them.
+    Ok(None)
 }
 
 /// Download + install the available update on the given channel, emitting

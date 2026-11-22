@@ -1741,7 +1741,7 @@ function Workspace() {
               filter: json(def.filter),
               sort: json(def.sort),
               projection: json(def.projection),
-              limit: def.limit ?? 50,
+              limit: def.limit ?? getBehaviorSettings().pageSize,
               skip: def.skip ?? 0,
             });
         handleBuilderStateChange(tabId, seeded);
